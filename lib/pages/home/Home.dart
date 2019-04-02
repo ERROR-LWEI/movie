@@ -7,6 +7,8 @@
  */
 import 'package:flutter/material.dart';
 import 'package:movie/components/search/SearchFiled.dart';
+import 'package:flutter/animation.dart';
+import 'package:movie/pages/home/AppbarNav.dart';
 
 class Home extends StatefulWidget {
 
@@ -17,8 +19,21 @@ class Home extends StatefulWidget {
 
 }
 
-class HomeState extends State<Home> {
+class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String label = "动态";
+  Animation<double> animation;
+  AnimationController controller;
+  Animation curve;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller = new AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
+    curve = new CurvedAnimation(parent: controller, curve: Curves.easeOut);
+    animation = new Tween(begin: 14.0, end: 20.0).animate(curve)
+      ..addStatusListener((state) => debugPrint("$state"));
+  }
 
   // 导航栏点击事件
   // @param { String str } 选中的栏目信息
@@ -27,33 +42,6 @@ class HomeState extends State<Home> {
       label = str;
     });
   }
-  
-  // 渲染导航栏的单个选项
-  Widget buildNavBarText(String label, Function onTap) {
-
-    return new GestureDetector(
-      onTap: () => onTap(label),
-      child: new Text(label, style: TextStyle(
-        color: Colors.white,
-        fontSize: 16.0
-      )),
-    );
-  }
-
-  // 渲染appbar底部的文字导航
-  Widget buildNavBar(Function onTap) {
-    return new Container(
-      width: 200,
-      padding: EdgeInsets.only(bottom: 10.0),
-      child: new Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          buildNavBarText("动态", onTap),
-          buildNavBarText("推荐", onTap)
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +49,19 @@ class HomeState extends State<Home> {
       appBar: new AppBar(
         title: new SearchFiled(label: label, onChange: _onNavTap),
         bottom: PreferredSize(
-          child: buildNavBar(_onNavTap),
+          child: AppbarNav(navs: ["动态","推荐","热点"], onTap: _onNavTap,),
           preferredSize: Size(100, 30),
         ),
         brightness: Brightness.dark,
       ),
       body: Text(label),
     );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
   }
 }
