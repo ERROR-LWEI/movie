@@ -9,6 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:movie/components/search/SearchFiled.dart';
 import 'package:flutter/animation.dart';
 import 'package:movie/pages/home/AppbarNav.dart';
+import 'package:movie/pages/home/Dynamic.dart';
+import 'package:movie/pages/home/Hotspot.dart';
+import 'package:movie/pages/home/Recommend.dart';
 
 class Home extends StatefulWidget {
 
@@ -21,13 +24,13 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String label = "动态";
+  Widget homepage = new Dynamic();
   Animation<double> animation;
   AnimationController controller;
   Animation curve;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller = new AnimationController(vsync: this, duration: const Duration(milliseconds: 2000));
     curve = new CurvedAnimation(parent: controller, curve: Curves.easeOut);
@@ -35,11 +38,23 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ..addStatusListener((state) => debugPrint("$state"));
   }
 
-  // 导航栏点击事件
+  // 首页切换
   // @param { String str } 选中的栏目信息
   void _onNavTap(String str) {
+    Widget page = new Dynamic();
+    switch (str) {
+      case "动态":
+        page = new Dynamic();
+        break;
+      case "推荐":
+        page = new Recommend();
+        break;
+      case "热点":
+        page = new Hotspot();
+        break;
+    }
     setState(() {
-      label = str;
+      homepage = page;
     });
   }
 
@@ -49,18 +64,34 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: new AppBar(
         title: new SearchFiled(label: label, onChange: _onNavTap),
         bottom: PreferredSize(
-          child: AppbarNav(navs: ["动态","推荐","热点"], onTap: _onNavTap,),
+          child: AppbarNav(navs: ["动态","推荐"], onTap: _onNavTap,),
           preferredSize: Size(100, 30),
         ),
         brightness: Brightness.dark,
       ),
-      body: Text(label),
+      body: homepage,
+      bottomNavigationBar: new BottomNavigationBar(
+        currentIndex: 0,
+        items: [
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: new Text("首页"),
+          ),          
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.movie),
+            title: new Text("电影"),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(Icons.data_usage),
+            title: new Text("我的"),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     controller.dispose();
     super.dispose();
   }

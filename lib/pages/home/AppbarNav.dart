@@ -15,26 +15,30 @@ class AppbarNav extends StatefulWidget {
 }
 
 class AppbarNavState extends State<AppbarNav> {
-  final navs_names = new Set<String>();
 
-  void _initState() {
-    super.initState();
-    pushnavs();
+  Widget buildNav(String str, Function onTap) {
+    return new GestureDetector(
+      onTap: () => onTap(str),
+      child: new Container(
+        child: new Text(str, style: TextStyle(fontSize: 16.0, color: Colors.white)),
+      ),
+    );
   }
 
-  void pushnavs() {
-    for(var i = 0; i < widget.navs; i ++) {
-      if (navs_names.contains(widget.navs[i])) {
-        navs_names.remove(widget.navs[i]);
-      } else {
-        navs_names.add(widget.navs[i]);
-      }
+  /// 塞入导航栏
+  List<Widget> pushNavs(List<String> navs, Function onTap) {
+    List<Widget> _navs = [];
+    for(String nav in navs) {
+      _navs.add(
+        new GestureDetector(
+          onTap: () => onTap(nav),
+          child: new Container(
+            child: new Text(nav, style: TextStyle(fontSize: 16.0, color: Colors.white)),
+          ),
+        )
+      );
     }
-  }
-
-
-  void buildNavs(List<String> navs) {
-
+    return _navs;
   }
 
 
@@ -44,15 +48,13 @@ class AppbarNavState extends State<AppbarNav> {
   
   @override
   Widget build(BuildContext context) {
-
-    buildNavs(widget.navs);
-
+    List<Widget> navstion = pushNavs(widget.navs, widget.onTap);
     return new Container(
       width: 200,
       padding: EdgeInsets.only(bottom: 6.0),
       child: new Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: _navs,
+        children: navstion,
       ),
     );
   }
