@@ -71,18 +71,23 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: homepage,
       bottomNavigationBar: new BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: 0,
         items: [
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
+            icon: new Icon(Icons.home, size: 26.0,),
             title: new Text("首页"),
           ),          
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.movie),
+            icon: new Icon(Icons.movie, size: 26.0,),
             title: new Text("电影"),
           ),
           new BottomNavigationBarItem(
-            icon: new Icon(Icons.data_usage),
+            icon: new Icon(IconData(0xebe9, fontFamily: "iconFont"), size: 26.0,),
+            title: new Text("小组"),
+          ),
+          new BottomNavigationBarItem(
+            icon: new Icon(IconData(0xeba3, fontFamily: "iconFont"), size: 26.0,),
             title: new Text("我的"),
           ),
         ],
