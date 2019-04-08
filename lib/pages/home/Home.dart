@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/components/search/SearchFiled.dart';
 import 'package:flutter/animation.dart';
-import 'package:movie/pages/home/AppbarNav.dart';
+import 'package:movie/components/appbarnav/AppbarNav.dart';
 import 'package:movie/pages/home/Dynamic.dart';
 import 'package:movie/pages/home/Hotspot.dart';
 import 'package:movie/pages/home/Recommend.dart';
@@ -24,7 +24,10 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> with SingleTickerProviderStateMixin {
   String label = "动态";
+  /// 当前页面
   Widget homepage = new Dynamic();
+  /// 当前页面
+
   Animation<double> animation;
   AnimationController controller;
   Animation curve;
@@ -55,7 +58,13 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
     }
     setState(() {
       homepage = page;
+      label = str;
     });
+  }
+
+  /// 底部导航栏选择事件
+  void bottomNavOnTap(int index) {
+    print(index);
   }
 
   @override
@@ -64,34 +73,13 @@ class HomeState extends State<Home> with SingleTickerProviderStateMixin {
       appBar: new AppBar(
         title: new SearchFiled(label: label, onChange: _onNavTap),
         bottom: PreferredSize(
-          child: AppbarNav(navs: ["动态","推荐"], onTap: _onNavTap,),
+          child: AppbarNav(navs: ["动态","推荐", "热点"], onTap: _onNavTap, color: Colors.white,),
           preferredSize: Size(100, 30),
         ),
         brightness: Brightness.dark,
       ),
+      backgroundColor: Colors.black12,
       body: homepage,
-      bottomNavigationBar: new BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: 0,
-        items: [
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.home, size: 26.0,),
-            title: new Text("首页"),
-          ),          
-          new BottomNavigationBarItem(
-            icon: new Icon(Icons.movie, size: 26.0,),
-            title: new Text("电影"),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(IconData(0xebe9, fontFamily: "iconFont"), size: 26.0,),
-            title: new Text("小组"),
-          ),
-          new BottomNavigationBarItem(
-            icon: new Icon(IconData(0xeba3, fontFamily: "iconFont"), size: 26.0,),
-            title: new Text("我的"),
-          ),
-        ],
-      ),
     );
   }
 

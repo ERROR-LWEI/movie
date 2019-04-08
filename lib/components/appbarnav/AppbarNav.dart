@@ -6,7 +6,9 @@ class AppbarNav extends StatefulWidget {
     Key key,
     this.navs = const <String>[],
     this.onTap,
+    this.color = Colors.black45,
   }): super(key:key);
+  final Color color;
   final navs;
   final Function onTap;
 
@@ -30,12 +32,12 @@ class AppbarNavState extends State<AppbarNav> {
     List<Widget> _navs = [];
     for(String nav in navs) {
       _navs.add(
-        new GestureDetector(
-          onTap: () => onTap(nav),
-          child: new Container(
-            child: new Text(nav, style: TextStyle(fontSize: 16.0, color: Colors.white)),
-          ),
-        )
+          new GestureDetector(
+            onTap: () => onTap(nav),
+            child: new Container(
+              child: new Text(nav, style: TextStyle(fontSize: 16.0, color: widget.color)),
+            ),
+          )
       );
     }
     return _navs;
@@ -45,7 +47,7 @@ class AppbarNavState extends State<AppbarNav> {
   Widget buildList() {
     return new ListTile();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     List<Widget> navstion = pushNavs(widget.navs, widget.onTap);

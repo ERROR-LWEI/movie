@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/pages/home/Home.dart';
+import 'package:movie/pages/InitialPage.dart';
 //import 'package:movie/components/search/SearchFiled.dart';
 // import 'package:english_words/english_words.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: new ThemeData(
         primaryColor: Colors.green,
       ),
-      home:new Home(),
+      home:new InitialPage(),
     );
   }
 }

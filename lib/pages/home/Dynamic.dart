@@ -12,7 +12,14 @@ class DynamicState extends State<Dynamic> {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      child: new Briefcard(),
+      child: new Briefcard(
+          icons: [
+            IconData(0xe60f, fontFamily: "iconFont"),
+            IconData(0xe61e, fontFamily: 'iconFont'),
+            IconData(0xe604, fontFamily: 'iconFont')],
+          num:['1','2', '5'],
+          iconSize: 20.0,
+      ),
     );
   }
 }

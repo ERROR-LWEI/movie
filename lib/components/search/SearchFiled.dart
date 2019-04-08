@@ -35,10 +35,11 @@ class SearchFiledState extends State<SearchFiled> {
       child: new TextField(
         cursorColor: Colors.grey,
         onChanged: onChange,
-        decoration: InputDecoration(
+        decoration: new InputDecoration(
           contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
           border: InputBorder.none,
-          icon: Icon(Icons.search),
+          icon: new Icon(Icons.search),
+          suffixIcon: new Icon(IconData(0xeb2a, fontFamily: "iconFont"), size: 28.0),
           hintText: label,
           hintStyle: new TextStyle(
             fontSize: 14,
@@ -57,6 +58,7 @@ class SearchFiledState extends State<SearchFiled> {
     return Container(
       decoration: new BoxDecoration(
         color: Colors.white,
+        border: Border.all(color: Colors.black26),
         borderRadius: new BorderRadius.all(new Radius.circular(30.0)),
       ),
       alignment: Alignment.center,
