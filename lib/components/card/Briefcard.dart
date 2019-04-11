@@ -17,6 +17,7 @@ class Briefcard extends StatefulWidget{
     this.fontColor = Colors.black45,
     this.fontSize = 12.0,
     this.fontWeight = FontWeight.w400,
+    this.title = '',
   }) : super(key:key);
   final icons;
   /// 按钮操作统计数
@@ -30,6 +31,8 @@ class Briefcard extends StatefulWidget{
   final fontSize;
   /// 字体粗细
   final fontWeight;
+  /// 显示信息
+  final String title;
 
   @override 
   BriefcardState createState() => BriefcardState();
@@ -42,11 +45,11 @@ class BriefcardState extends State<Briefcard> {
 //  }
 
   /// 渲染文本信息
-  Widget buildText() {
+  Widget buildText(String str) {
 
     return new Container(
       margin: EdgeInsets.only(bottom: 15.0),
-      child: new Text('测试啊是个大噶建设的更加爱护公司的哈感觉啊广东省嘎哈说过的话建安公司大哥说的哈个时间的哈公司的噶机会的撒但是感觉啊好啊还是个大还是给大家撒谎给大家好多噶三个阶段很高'),
+      child: new Text(str),
     );
   }
 
@@ -99,7 +102,7 @@ class BriefcardState extends State<Briefcard> {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          buildText(),
+          buildText(widget.title),
           buildBotton(widget.num, widget.icons)
         ],
       ),
