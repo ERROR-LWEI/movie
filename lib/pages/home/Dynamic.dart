@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:movie/components/card/Briefcard.dart';
-import 'package:movie/DTO/dynamic.dart';
+import 'package:movie/models/DynamicJson.dart';
 
 class Dynamic extends StatefulWidget {
 
@@ -9,22 +10,22 @@ class Dynamic extends StatefulWidget {
 }
 
 class DynamicState extends State<Dynamic> {
-  List<Map<DynamicData, String>> dynamicList = [{
-    // ignore: undefined_identifier
-    title: "1",
-  }];
+  List<DynamicJson> dynamicList;
+
+  @override
+  void initState() {
+    super.initState();
+    print('123');
+  }
 
   Widget buildCarList() {
     return new ListView.builder(
         padding: const EdgeInsets.only(bottom: 10.0),
         itemBuilder: (context, i) {
           final index = i ~/ 2;
-//          if (index >= dynamicList.length) {
-//            dynamicList.addAll()
-//          }
           return new Briefcard(
-            title: dynamicList[index],
-          )
+            title: dynamicList[index].id,
+          );
         }
     );
   }

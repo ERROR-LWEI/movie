@@ -2,12 +2,12 @@ abstract class DynamicData extends StatisticsData {
   /// 内容信息
   String title;
   /// 统计相关数据
-  Map<StatisticsData, String> statiss;
+  // Map<StatisticsData, String> statiss;
   String getTitle() {
     return title;
   }
   void setTitle(String title) {
-    this.title;
+    this.title = title;
   }
 }
 
