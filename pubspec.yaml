@@ -19,6 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  json_annotation: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -28,6 +29,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # 生成数据模型
+  build_runner: ^1.0.0
+  # json序列化
+  json_serializable: ^2.0.0
 
 
 # For information on the generic Dart part of this file, see the
@@ -56,7 +61,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: iconFont
+      fonts:
+          - asset: assets/font/iconfont.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
