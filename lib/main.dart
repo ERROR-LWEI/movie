@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie/pages/home/Home.dart';
-import 'package:movie/pages/InitialPage.dart';
-//import 'package:movie/components/search/SearchFiled.dart';
-// import 'package:english_words/english_words.dart';
+import 'package:movie/widget/Layout.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,10 +9,11 @@ class MyApp extends StatelessWidget {
   Widget build (BuildContext context) {
 
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: new ThemeData(
         primaryColor: Colors.green,
       ),
-      home:new InitialPage(),
+      home:new Layout(),
     );
   }
 }
