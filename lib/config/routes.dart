@@ -1,5 +1,6 @@
 import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:movie/config/handler.dart';
 
 class Routes {
   static String root = "/";
@@ -11,6 +12,6 @@ class Routes {
         print("ROUTE WAS NOT FOUND!!!");
       }
     );
-    router.define(root)
+    router.define(root, handler: homeHandler);
   }
 }
