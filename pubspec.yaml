@@ -64,7 +64,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: iconFont
+    - family: AntIcons
       fonts:
           - asset: assets/font/iconfont.ttf
   #   - family: Schyler
