@@ -14,6 +14,9 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> _loginFormKey = new GlobalKey();
   bool isShowPassword = false;
 
+  String _name;
+  String _password;
+
 
   void showPassword() {
     setState(() {
@@ -32,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               buildLoginTextForm(),
               Padding(
-                padding: EdgeInsets.only(top: 50),
+                padding: EdgeInsets.only(top: 100),
                 child: new Text(
                   "忘记密码?",
                   style: new TextStyle(fontSize: 16, color: Colors.white, decoration: TextDecoration.underline),),
@@ -89,7 +92,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-          new Positioned(child: buildLoginButton(), top: 170,)
+          //buildLoginButton()
+          new Positioned(child: buildLoginButton(), top: 210,)
         ],
       ),
     );
@@ -129,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   onSaved: (value) {
-
+                    _name = value;
                   },
                 ),
               ),
@@ -158,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   onSaved: (value){
-
+                    _password = value;
                   },
                 ),
               ),
@@ -184,6 +188,7 @@ class _LoginPageState extends State<LoginPage> {
         if(_loginFormKey.currentState.validate()) {
           Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("进行登陆"),));
           _loginFormKey.currentState.save();
+          print('帐户$_name, 密码$_password');
         }
       },
     );
