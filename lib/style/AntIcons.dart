@@ -98,4 +98,26 @@ class AntIcons {
   static const IconData dropbox_square_fill = IconData(0xe977, fontFamily: "AntIcons");
   static const IconData dribbble_square_fill = IconData(0xe976, fontFamily: "AntIcons");
   static const IconData codepen_square_fill = IconData(0xe975, fontFamily: "AntIcons");
+  static const IconData amazon_square_fill = IconData(0xe974, fontFamily: "AntIcons");
+  static const IconData behance_square_fill = IconData(0xe973, fontFamily: "AntIcons");
+  static const IconData codesandbox_square_fill = IconData(0xe972, fontFamily: "AntIcons");
+  static const IconData dingtalk_square_fill = IconData(0xe971, fontFamily: "AntIcons");
+  static const IconData alipay_square_fill = IconData(0xe970, fontFamily: "AntIcons");
+  static const IconData reddit_circle_fill = IconData(0xe96f, fontFamily: "AntIcons");
+  static const IconData zhihu_circle_fill = IconData(0xe96e, fontFamily: "AntIcons");
+  static const IconData weibo_circle_fill = IconData(0xe96d, fontFamily: "AntIcons");
+  static const IconData taobao_circle_fill = IconData(0xe96c, fontFamily: "AntIcons");
+  static const IconData twitter_circle_fill = IconData(0xe96b, fontFamily: "AntIcons");
+  static const IconData slack_circle_fill = IconData(0xe96a, fontFamily: "AntIcons");
+  static const IconData sketch_circle_fill = IconData(0xe969, fontFamily: "AntIcons");
+  static const IconData dingtalk_circle_fill = IconData(0xe968, fontFamily: "AntIcons");
+  static const IconData google_circle_fill = IconData(0xe967, fontFamily: "AntIcons");
+  static const IconData ie_circle_fill = IconData(0xe966, fontFamily: "AntIcons");
+  static const IconData qq_circle_fill = IconData(0xe965, fontFamily: "AntIcons");
+  static const IconData medium_circle_fill = IconData(0xe964, fontFamily: "AntIcons");
+  static const IconData googleplus_circle_fill = IconData(0xe963, fontFamily: "AntIcons");
+  static const IconData dribbble_circle_fill = IconData(0xe962, fontFamily: "AntIcons");
+  static const IconData github_fill = IconData(0xe961, fontFamily: "AntIcons");
+  static const IconData dropbox_circle_fill = IconData(0xe960, fontFamily: "AntIcons");
+  static const IconData codesandbox_circle_fill = IconData(0xe95f, fontFamily: "AntIcons");
 }
