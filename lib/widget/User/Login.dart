@@ -191,10 +191,10 @@ class _LoginPageState extends State<LoginPage> {
         if(_loginFormKey.currentState.validate()) {
           Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("进行登陆"),));
           _loginFormKey.currentState.save();
-          FormData formdata = FormData.from({ 'account': _name, 'password': _password });
+
           HttpDio.getInstance().post(apipath['login'], (data){
             print(data);
-          }, params: formdata, error: (err){
+          }, params: { 'account': _name, 'password': _password }, error: (err){
             print(err);
           });
           print('帐户$_name, 密码$_password');
