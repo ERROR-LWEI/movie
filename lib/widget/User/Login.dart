@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 23),
+      // padding: EdgeInsets.only(top: 23),
       child: new Stack(
         alignment: Alignment.center,
         children: <Widget>[
