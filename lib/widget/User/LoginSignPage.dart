@@ -1,6 +1,7 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/application.dart';
+import 'package:movie/style/AntIcons.dart';
 import 'package:movie/style/theme.dart' as theme;
 
 class LoginSignPage extends StatefulWidget {
@@ -59,13 +60,14 @@ class _LoginSignPageState extends State<LoginSignPage> {
     return Scaffold(
       body: new SafeArea(
         top: false,
+        bottom: false,
         child: new SingleChildScrollView(
           child: new Container(
             padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top, bottom: MediaQuery.of(context).padding.bottom),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: new BoxDecoration(
-              gradient: theme.Theme.primaryGradient,
+              //gradient: theme.Theme.primaryGradient,
               color: Colors.white
             ),
             alignment: Alignment.center,
@@ -73,7 +75,60 @@ class _LoginSignPageState extends State<LoginSignPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 buildLoginBottom(context),
-                buildSiginBottom(context)
+                buildSiginBottom(context),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: new Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Container(
+                        height: 1,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          //gradient: new LinearGradient(colors: [Colors.white10, Colors.white])
+                          color: Colors.black26
+                        ),
+                      ),
+                      new Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
+                        child: new Text("或", style: new TextStyle(fontSize: 16, color: Colors.black54)),
+                      ),
+                      new Container(
+                        height: 1,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          // gradient: new LinearGradient(
+                          //   colors: [Colors.white, Colors.white10]
+                          // )
+                          color: Colors.black26
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                new SizedBox(height: 20,),
+                new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: new IconButton(icon: Icon(AntIcons.github_fill), color: Color(0xFF0084ff), onPressed: null,),
+                    ),
+                    new SizedBox(width: 40,),
+                    new Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.black26,
+                      ),
+                      child: new IconButton(icon: Icon(AntIcons.github_fill), color: Color(0xFF0084ff),onPressed: null,),
+                    )
+                  ],
+                ),
               ],
             ),
           ),

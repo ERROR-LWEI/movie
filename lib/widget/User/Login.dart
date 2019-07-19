@@ -9,7 +9,12 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: new Text("Login"),
+      child: new Scaffold(
+        appBar: AppBar(
+          title: new Text("测试"),
+        ),
+        body: new Text("测试"),
+      )
     );
   }
 }
