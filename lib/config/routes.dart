@@ -4,7 +4,9 @@ import 'package:movie/config/handler.dart';
 
 class Routes {
   static String root = "/";
-  static String login = "/login";
+  static String auth = "/auth";
+  static String login = "/auth/login";
+  static String sigin = "/auth/sigin";
 
   static void configureRoutes(Router router) {
     router.notFoundHandler = new Handler(
@@ -12,6 +14,8 @@ class Routes {
         print("ROUTE WAS NOT FOUND!!!");
       }
     );
-    router.define(root, handler: homeHandler);
+    router.define(root, handler: authHandler);
+    router.define(login, handler: loginHandler);
+    router.define(sigin, handler: siginHandler);
   }
 }
