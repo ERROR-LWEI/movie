@@ -24,7 +24,7 @@ class _LoginSignPageState extends State<LoginSignPage> {
   Widget buildLoginBottom(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(left: 60, right: 60, top: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
           // gradient: theme.Theme.primaryGradient,
@@ -41,7 +41,7 @@ class _LoginSignPageState extends State<LoginSignPage> {
   Widget buildSiginBottom(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(left: 60, right: 60, top: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
           color: Colors.black26
@@ -65,10 +65,12 @@ class _LoginSignPageState extends State<LoginSignPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: new BoxDecoration(
-              //gradient: theme.Theme.primaryGradient
+              gradient: theme.Theme.primaryGradient,
               color: Colors.white
             ),
+            alignment: Alignment.center,
             child: new Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 buildLoginBottom(context),
                 buildSiginBottom(context)
