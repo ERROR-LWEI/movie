@@ -6,6 +6,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "App",
+      theme: new ThemeData(
+        primaryColor: Colors.yellow,
+      ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
     );

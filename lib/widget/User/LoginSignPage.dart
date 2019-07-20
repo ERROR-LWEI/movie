@@ -2,7 +2,6 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/config/application.dart';
 import 'package:movie/style/AntIcons.dart';
-import 'package:movie/style/theme.dart' as theme;
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginSignPage extends StatefulWidget {
@@ -134,7 +133,7 @@ class _LoginSignPageState extends State<LoginSignPage> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                       ),
-                      child: new IconButton(icon: Icon(AntIcons.weibo), color: Colors.green, iconSize: 50, onPressed: null,),
+                      child: new IconButton(icon: Icon(AntIcons.weibo), color: Colors.red, iconSize: 50, onPressed: () async{},),
                     )
                   ],
                 ),
