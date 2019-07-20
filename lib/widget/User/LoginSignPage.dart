@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie/config/application.dart';
 import 'package:movie/style/AntIcons.dart';
 import 'package:movie/style/theme.dart' as theme;
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginSignPage extends StatefulWidget {
   @override
@@ -74,7 +75,12 @@ class _LoginSignPageState extends State<LoginSignPage> {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                new Container(
+                  alignment: Alignment.center,
+                  child: new Image.asset("assets/images/logo.jpg"),
+                ),
                 buildLoginBottom(context),
+                new SizedBox(height: 20,),
                 buildSiginBottom(context),
                 Padding(
                   padding: EdgeInsets.only(top: 20),
@@ -116,16 +122,19 @@ class _LoginSignPageState extends State<LoginSignPage> {
                         shape: BoxShape.circle,
                         color: Colors.white,
                       ),
-                      child: new IconButton(icon: Icon(AntIcons.github_fill), color: Color(0xFF0084ff), onPressed: null,),
+                      child: new IconButton(icon: Icon(AntIcons.wechat_fill), color: Colors.green, iconSize: 50, onPressed: () async{
+                        if(await canLaunch('wexin://')) {
+                          await launch('wexin://');
+                        }
+                      },),
                     ),
                     new SizedBox(width: 40,),
                     new Container(
                       padding: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.black26,
                       ),
-                      child: new IconButton(icon: Icon(AntIcons.github_fill), color: Color(0xFF0084ff),onPressed: null,),
+                      child: new IconButton(icon: Icon(AntIcons.weibo), color: Colors.green, iconSize: 50, onPressed: null,),
                     )
                   ],
                 ),

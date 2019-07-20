@@ -120,4 +120,22 @@ class AntIcons {
   static const IconData github_fill = IconData(0xe961, fontFamily: "AntIcons");
   static const IconData dropbox_circle_fill = IconData(0xe960, fontFamily: "AntIcons");
   static const IconData codesandbox_circle_fill = IconData(0xe95f, fontFamily: "AntIcons");
+  static const IconData codepen_circle_fill = IconData(0xe95e, fontFamily: "AntIcons");
+  static const IconData amazon_circle_fill = IconData(0xe95d, fontFamily: "AntIcons");
+  static const IconData behance_circle_fill = IconData(0xe95c, fontFamily: "AntIcons");
+  static const IconData aliwangwang_fill = IconData(0xe95b, fontFamily: "AntIcons");
+  static const IconData alipay_circle_fill = IconData(0xe95a, fontFamily: "AntIcons");
+  static const IconData chrome_fill = IconData(0xe959, fontFamily: "AntIcons");
+  static const IconData wechat_fill = IconData(0xe958, fontFamily: "AntIcons");
+  static const IconData yahoo_fill = IconData(0xe957, fontFamily: "AntIcons");
+  static const IconData youtube_fill = IconData(0xe956, fontFamily: "AntIcons");
+  static const IconData yuque_fill = IconData(0xe955, fontFamily: "AntIcons");
+  static const IconData weibo = IconData(0xe954, fontFamily: "AntIcons");
+  static const IconData skype_fill = IconData(0xe953, fontFamily: "AntIcons");
+  static const IconData twitter = IconData(0xe952, fontFamily: "AntIcons");
+  static const IconData qq = IconData(0xe951, fontFamily: "AntIcons");
+  static const IconData windows_fill = IconData(0xe950, fontFamily: "AntIcons");
+  static const IconData html5_fill = IconData(0xe94f, fontFamily: "AntIcons");
+  static const IconData apple_fill = IconData(0xe94e, fontFamily: "AntIcons");
+  static const IconData android_fill = IconData(0xe94d, fontFamily: "AntIcons");
 }
