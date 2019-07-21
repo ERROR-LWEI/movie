@@ -104,7 +104,7 @@ class _SiginPageState extends State<SiginPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             new Text("注册", style: new TextStyle(fontSize: 25),),
-            new Icon(Icons.remove_circle)
+            new Icon(AntIcons.arrowright, size: 25,)
           ],
         ),
         //child: new Text("登陆", style: new TextStyle(fontSize: 25),),
@@ -112,7 +112,7 @@ class _SiginPageState extends State<SiginPage> {
       onTap: () {
         if(_siginFormKey.currentState.validate()) {
           _siginFormKey.currentState.save();
-          print(_account.isEmpty);
+          //print(_account.isEmpty);
         }
         // if(_loginFormKey.currentState.validate()) {
         //   Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("进行登陆"),));

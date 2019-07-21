@@ -1,6 +1,12 @@
+import 'package:dio/dio.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/components/LoadingDialog.dart';
+import 'package:movie/config/api.dart';
 import 'package:movie/config/application.dart';
+import 'package:movie/models/AuthorJson.dart';
+import 'package:movie/models/ResponseJson.dart';
+import 'package:movie/service/http.dart';
 import 'package:movie/style/AntIcons.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,9 +36,32 @@ class _LoginPageState extends State<LoginPage> {
       transition: TransitionType.inFromRight
     ).then((val) {
       if (val != null) {
-        print(val);
+        //print(val);
       }
     });
+  }
+
+
+  void _loginFunc(Function func) {
+    HttpDio.getInstance().post(
+      apipath['login'], 
+      (ResponseJson value){
+        print(value);
+        func();
+        if (value.code == 1 && value.type != "ERROR") {
+          onSkip(context, '/auth/sigin');
+          //_loginFormKey.currentState.reset();
+        }
+      },
+      params: {
+        'account': account,
+        'password': password
+      },
+      error: (DioError e) {
+        print(e);
+        func();
+      }
+    );
   }
 
   Widget buildFomField() {
@@ -114,20 +143,25 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             new Text("登陆", style: new TextStyle(fontSize: 25),),
-            new Icon(Icons.remove_circle)
+            new Icon(AntIcons.arrowright,size: 25,)
           ],
         ),
         //child: new Text("登陆", style: new TextStyle(fontSize: 25),),
       ),
-      onTap: () {
-        if(_loginFormKey.currentState.validate()) {
-          _loginFormKey.currentState.save();
-          print(account.isEmpty);
+      onTap: () async {
+        _loginFormKey.currentState.save();
+        if(account.isNotEmpty && password.isNotEmpty) {
+          showDialog(
+            context: context,
+            builder: (context){
+              return new LoadingDialog(
+                loadingText: '登录中...',
+                outsideDismiss: false,
+                dismissDialog: _loginFunc,
+              );
+            }
+          );
         }
-        // if(_loginFormKey.currentState.validate()) {
-        //   Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("进行登陆"),));
-        //   _loginFormKey.currentState.save();
-        // }
       },
     );
   }

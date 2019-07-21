@@ -17,7 +17,7 @@ class _LoginSignPageState extends State<LoginSignPage> {
       transition: TransitionType.inFromRight
     ).then((val) {
       if (val != null) {
-        print(val);
+        //print(val);
       }
     });
   }
@@ -25,7 +25,7 @@ class _LoginSignPageState extends State<LoginSignPage> {
   Widget buildLoginBottom(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 100, right: 100, top: 10, bottom: 10),
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
           // gradient: theme.Theme.primaryGradient,
@@ -42,10 +42,10 @@ class _LoginSignPageState extends State<LoginSignPage> {
   Widget buildSiginBottom(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(left: 80, right: 80, top: 10, bottom: 10),
+        padding: EdgeInsets.only(left: 100, right: 100, top: 10, bottom: 10),
         decoration: new BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(40)),
-          color: Colors.black26
+          color: Colors.black45
         ),
         child: new Text("注册", style: new TextStyle(fontSize: 25, color: Colors.white),),
       ),

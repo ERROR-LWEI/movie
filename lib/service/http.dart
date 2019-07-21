@@ -1,5 +1,10 @@
-import 'dart:convert';
+import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import 'package:movie/models/ResponseJson.dart';
+import 'package:cookie_jar/cookie_jar.dart';
 
 class HttpDio {
   static final String gettype = "get";
@@ -18,10 +23,11 @@ class HttpDio {
 
   HttpDio() {
     dio = Dio(BaseOptions(
-      headers: {},
       connectTimeout: 5000,
       receiveTimeout: 10000,
     ));
+    dio.interceptors.add(CookieManager(CookieJar()));
+    // new PersistCookieJar(dir: "./cookies");
   }
 
   Future get(String url, Function success, { params, Function error }) async{
@@ -29,14 +35,10 @@ class HttpDio {
   }
 
   Future post(String url, Function success, { params, Function error }) async {
-    print(params);
     _request(url, success, posttype, params, error);
   }
 
   Future _request(String url, Function success, [String method, params, Function error ]) async{
-    String _error_msg = '';
-    int _code;
-
     try {
       Response res;
       if (method == gettype) {
@@ -52,32 +54,20 @@ class HttpDio {
           res = await dio.post(url);
         }
       }
-      _code = res.statusCode;
-      if (_code < 200 || _code > 300) {
-        _error_msg = '错误码：' + _code.toString() + '，' + res.data.toString();
-        _error(error, _error_msg);
-        return;
-      }
-
-      String data_str = json.encode(res.data);
-      Map<String, dynamic> dataMap = json.decode(data_str);
-      print(dataMap);
-      if (dataMap != null && dataMap[codetype] != 0) {
-        _error_msg = '错误码：' + dataMap[codetype].toString() + '，' + res.data.toString();
-        _error(error, _error_msg);
-        return;
-      }
+      var datajson = new ResponseJson.fromJson(res.data);
       if(success != null) {
-        success(dataMap[datatype]);
+        success(datajson);
       }
-    } catch (e) {
-      _error(error, e.toString());
+    } on DioError catch (e) {
+      _error(error, e);
+      return;
     }
+    return;
   }
 
-  _error(Function error, String msg) {
+  _error(Function error, e) {
     if (error != null) {
-      error(msg);
+      error(e);
     }
   }
 }
