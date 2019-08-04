@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie/components/Search.dart';
 import 'package:movie/style/AntIcons.dart';
+import 'package:movie/widget/Home/Index/Index.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -22,41 +23,7 @@ class _HomeState extends State<Home> {
     return DefaultTabController(
       length: 3,
       child: new Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.green,
-          elevation: 0,
-          title: new SearchComponent(),
-          centerTitle: false,
-          brightness: Brightness.dark,
-          automaticallyImplyLeading: false,
-          flexibleSpace: Icon(Icons.email),
-          actions: <Widget>[
-            new Container(
-              //padding: EdgeInsets.only(top: 15),
-              width: 50,
-              alignment: Alignment.center,
-              child: new Icon(Icons.alternate_email),
-            ),
-          ],
-          bottom: new TabBar(
-            indicatorColor: Colors.green,
-            indicatorSize: TabBarIndicatorSize.label,
-            labelColor: Colors.white,
-            indicatorPadding: EdgeInsets.only(left: 40, right: 40),
-            tabs: <Widget>[
-              Tab(text: "热门",),
-              Tab(text: "动态",),
-              Tab(text: "热门",)
-            ],
-          ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            Icon(Icons.local_florist, size: 128.0, color: Colors.black12),
-            Icon(Icons.change_history, size: 128.0, color: Colors.black12),
-            Icon(Icons.directions_bike, size: 128.0, color: Colors.black12),
-          ],
-        ),
+        body: IndexPage(),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (int index) {

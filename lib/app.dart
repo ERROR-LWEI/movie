@@ -7,7 +7,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: "App",
       theme: new ThemeData(
-        primaryColor: Colors.green,
+        primaryColor: Colors.red[400],
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
