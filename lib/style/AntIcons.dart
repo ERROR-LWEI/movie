@@ -170,5 +170,8 @@ class AntIcons {
   static const IconData medium = IconData(0xe92f, fontFamily: "AntIcons");
   static const IconData googleplus = IconData(0xe92e, fontFamily: "AntIcons");
   static const IconData behance = IconData(0xe92d, fontFamily: "AntIcons");
+  static const IconData home_fill = IconData(0xe904, fontFamily: "AntIcons");
   static const IconData arrowright = IconData(0xe85e, fontFamily: "AntIcons");
+  static const IconData home = IconData(0xe801, fontFamily: "AntIcons");
+  static const IconData user = IconData(0xe7ce, fontFamily: "AntIcons");
 }
