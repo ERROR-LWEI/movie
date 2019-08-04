@@ -9,24 +9,33 @@ import 'package:movie/service/http.dart';
 import 'package:movie/style/AntIcons.dart';
 import 'package:movie/utils/cipher.dart';
 
-class LoginPage extends StatefulWidget {
+class ResetPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _ResetPageState createState() => _ResetPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _ResetPageState extends State<ResetPage> {
   FocusNode accountFocusNode = new FocusNode();
   FocusNode passwordFocusNode = new FocusNode();
+  FocusNode confirmPasswordNode = new FocusNode();
   FocusScopeNode focusScopeNode = new FocusScopeNode();
-  GlobalKey<FormState> _loginFormKey = new GlobalKey();
+  GlobalKey<FormState> _resetFormKey = new GlobalKey();
   bool isShowPassword = false;
+  bool isShowPasswordConfirm = false;
 
   String account;
   String password;
+  String confirmPassword;
 
   void showPassword() {
     setState(() {
       isShowPassword = !isShowPassword;
+    });
+  }
+
+  void showPasswordConfirm() {
+    setState(() {
+      isShowPasswordConfirm = !isShowPasswordConfirm;
     });
   }
 
@@ -41,15 +50,14 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-  void _loginFunc(Function func) {
+  void _resetFunc(Function func) {
     HttpDio.getInstance().post(
       apipath['login'], 
       (ResponseJson value){
         func();
         if (value.code == 1 && value.type != "ERROR") {
-          onSkip(context, '/home');
-          _loginFormKey.currentState.reset();
+          onSkip(context, '/auth/sigin');
+          _resetFormKey.currentState.reset();
         }
       },
       params: {
@@ -63,13 +71,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
   Widget buildFomField() {
     return new Container(
       // decoration: new BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: Colors.black12),
       width: 500,
-      height: 140,
+      height: 200,
       child: new Form(
-        key: _loginFormKey,
+        key: _resetFormKey,
         child: new Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
@@ -127,53 +136,65 @@ class _LoginPageState extends State<LoginPage> {
               width: 500,
               color: Colors.black12,
             ),
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 8),
+                child: new TextFormField(
+                  focusNode: confirmPasswordNode,
+                  decoration: new InputDecoration(
+                    hintText: "确认密码",
+                    border: InputBorder.none,
+                    suffixIcon: new IconButton(icon: new Icon(isShowPasswordConfirm ? AntIcons.eye_close_fill : AntIcons.eye_close, color: Colors.black45,), onPressed: showPasswordConfirm,)
+                  ),
+                  obscureText: !isShowPasswordConfirm,
+                  style: new TextStyle(fontSize: 18, color: Colors.black),
+                  onSaved: (value){
+                    setState(() {
+                      confirmPassword=value;
+                    });
+                  },
+                ),
+              ),
+            ),
+            new Container(
+              height: 1,
+              width: 500,
+              color: Colors.black12,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildLoginButton(BuildContext context) {
+  Widget buildResetButton(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(top: 2, bottom: 2),
+        padding: EdgeInsets.only(top: 40, bottom: 2),
         alignment: Alignment.centerRight,
         child: new Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            new Text("登陆", style: new TextStyle(fontSize: 25),),
+            new Text("重置", style: new TextStyle(fontSize: 25),),
             new Icon(AntIcons.arrowright,size: 25,)
           ],
         ),
         //child: new Text("登陆", style: new TextStyle(fontSize: 25),),
       ),
       onTap: () async {
-        _loginFormKey.currentState.save();
+        _resetFormKey.currentState.save();
         if(account.isNotEmpty && password.isNotEmpty) {
           showDialog(
             context: context,
             builder: (context){
               return new LoadingDialog(
-                loadingText: '登录中...',
+                loadingText: '重置中...',
                 outsideDismiss: false,
-                dismissDialog: _loginFunc,
+                dismissDialog: _resetFunc,
               );
             }
           );
         }
-      },
-    );
-  }
-
-  Widget buildResetPassword(BuildContext context) {
-    return new GestureDetector(
-      child: new Container(
-        padding: EdgeInsets.only(top: 15),
-        alignment: Alignment.centerLeft,
-        child: new Text("忘记密码?", style: new TextStyle(fontSize: 16, color: Colors.black38),),
-      ),
-      onTap: () {
-        onSkip(context, '/auth/resetPassword');
       },
     );
   }
@@ -203,14 +224,13 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 new Container(
                   alignment: Alignment.centerLeft,
-                  child: new Text("账号登陆", style: TextStyle(
+                  child: new Text("密码重置", style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold
                   ),),
                 ),
                 buildFomField(),
-                buildResetPassword(context),
-                buildLoginButton(context)
+                buildResetButton(context)
               ],
             ),
           ),

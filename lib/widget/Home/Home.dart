@@ -8,8 +8,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return new Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        elevation: 0,
+      ),
+      body: new SingleChildScrollView(
+        child: new Text("测试")
+      ),
     );
   }
 }

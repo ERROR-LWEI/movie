@@ -1,8 +1,4 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:path_provider/path_provider.dart';
 import 'package:movie/models/ResponseJson.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 
@@ -27,7 +23,6 @@ class HttpDio {
       receiveTimeout: 10000,
     ));
     dio.interceptors.add(CookieManager(CookieJar()));
-    // new PersistCookieJar(dir: "./cookies");
   }
 
   Future get(String url, Function success, { params, Function error }) async{
@@ -54,7 +49,12 @@ class HttpDio {
           res = await dio.post(url);
         }
       }
+
       var datajson = new ResponseJson.fromJson(res.data);
+      if (datajson.type == 'ERROR') {
+        _error(error, res.data);
+        return;
+      }
       if(success != null) {
         success(datajson);
       }
