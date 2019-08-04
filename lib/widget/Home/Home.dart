@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     return DefaultTabController(
       length: 3,
       child: new Scaffold(
-        appBar: new AppBar(
+        appBar: AppBar(
           backgroundColor: Colors.green,
           elevation: 0,
           title: new SearchComponent(),

@@ -1,7 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/components/LoadingDialog.dart';
+import 'package:movie/config/api.dart';
 import 'package:movie/config/application.dart';
+import 'package:movie/models/ResponseJson.dart';
+import 'package:movie/service/http.dart';
 import 'package:movie/style/AntIcons.dart';
+import 'package:movie/utils/cipher.dart';
 
 
 class SiginPage extends StatefulWidget {
@@ -19,17 +25,45 @@ class _SiginPageState extends State<SiginPage> {
   String _account;
   String _password;
 
-  void _showPassword() {
-    setState(() {
-      _isShowPassword = !_isShowPassword;
+    void onSkip(BuildContext context, String name) {
+    Application.router.navigateTo(
+      context, name, 
+      transition: TransitionType.inFromRight
+    ).then((val) {
+      if (val != null) {
+        //print(val);
+      }
     });
+  }
+
+
+  void _siginFunc(Function func) {
+    HttpDio.getInstance().post(
+      apipath['sigin'], 
+      (ResponseJson value){
+        func();
+        if (value.code == 1 && value.type != "ERROR") {
+          onSkip(context, '/home');
+          _siginFormKey.currentState.reset();
+        }
+      },
+      params: {
+        'type': 'user',
+        'account': _account,
+        'password': encode(_password)
+      },
+      error: (DioError e) {
+        print(e);
+        func();
+      }
+    );
   }
 
   Widget buildFomField() {
     return new Container(
-      // decoration: new BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: Colors.black12),
       width: 500,
-      height: 140,
+      height: 160,
+      padding: EdgeInsets.only(top: 20.0),
       child: new Form(
         key: _siginFormKey,
         child: new Column(
@@ -48,6 +82,7 @@ class _SiginPageState extends State<SiginPage> {
                   },
                   decoration: new InputDecoration(
                     hintText: "输入邮箱/手机号",
+                    hintStyle: TextStyle(color: Colors.black26),
                     border: InputBorder.none
                   ),
                   style: new TextStyle(fontSize: 18, color: Colors.black),
@@ -72,7 +107,7 @@ class _SiginPageState extends State<SiginPage> {
                   decoration: new InputDecoration(
                     hintText: "输入密码",
                     border: InputBorder.none,
-                    suffixIcon: new IconButton(icon: new Icon(_isShowPassword ? AntIcons.eye_close_fill : AntIcons.eye_close, color: Colors.black45,), onPressed: _showPassword,)
+                    hintStyle: TextStyle(color: Colors.black26)
                   ),
                   obscureText: !_isShowPassword,
                   style: new TextStyle(fontSize: 18, color: Colors.black),
@@ -110,14 +145,19 @@ class _SiginPageState extends State<SiginPage> {
         //child: new Text("登陆", style: new TextStyle(fontSize: 25),),
       ),
       onTap: () {
-        if(_siginFormKey.currentState.validate()) {
-          _siginFormKey.currentState.save();
-          //print(_account.isEmpty);
+        _siginFormKey.currentState.save();
+        if(_account.isNotEmpty && _password.isNotEmpty) {
+          showDialog(
+            context: context,
+            builder: (context){
+              return new LoadingDialog(
+                loadingText: '注册中...',
+                outsideDismiss: false,
+                dismissDialog: _siginFunc,
+              );
+            }
+          );
         }
-        // if(_loginFormKey.currentState.validate()) {
-        //   Scaffold.of(context).showSnackBar(new SnackBar(content: new Text("进行登陆"),));
-        //   _loginFormKey.currentState.save();
-        // }
       },
     );
   }
@@ -129,6 +169,7 @@ class _SiginPageState extends State<SiginPage> {
     return Container(
       child: new Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0,
         ),

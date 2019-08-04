@@ -24,12 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   String account;
   String password;
 
-  void showPassword() {
-    setState(() {
-      isShowPassword = !isShowPassword;
-    });
-  }
-
   void onSkip(BuildContext context, String name) {
     Application.router.navigateTo(
       context, name, 
@@ -65,9 +59,9 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildFomField() {
     return new Container(
-      // decoration: new BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: Colors.black12),
       width: 500,
-      height: 140,
+      height: 160,
+      padding: EdgeInsets.only(top: 20.0),
       child: new Form(
         key: _loginFormKey,
         child: new Column(
@@ -75,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Flexible(
               child: Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8),
+                padding: EdgeInsets.only(top: 10, bottom: 8),
                 child: new TextFormField(
                   focusNode: accountFocusNode,
                   onEditingComplete: () {
@@ -86,7 +80,8 @@ class _LoginPageState extends State<LoginPage> {
                   },
                   decoration: new InputDecoration(
                     hintText: "输入邮箱/手机号",
-                    border: InputBorder.none
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(color: Colors.black26)
                   ),
                   style: new TextStyle(fontSize: 18, color: Colors.black),
                   onSaved: (value) {
@@ -104,13 +99,13 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Flexible(
               child: Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 8),
+                padding: EdgeInsets.only(top: 10, bottom: 8,),
                 child: new TextFormField(
                   focusNode: passwordFocusNode,
                   decoration: new InputDecoration(
                     hintText: "输入密码",
+                    hintStyle: TextStyle(color: Colors.black26),
                     border: InputBorder.none,
-                    suffixIcon: new IconButton(icon: new Icon(isShowPassword ? AntIcons.eye_close_fill : AntIcons.eye_close, color: Colors.black45,), onPressed: showPassword,)
                   ),
                   obscureText: !isShowPassword,
                   style: new TextStyle(fontSize: 18, color: Colors.black),
@@ -168,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget buildResetPassword(BuildContext context) {
     return new GestureDetector(
       child: new Container(
-        padding: EdgeInsets.only(top: 15),
+        padding: EdgeInsets.only(top: 5),
         alignment: Alignment.centerLeft,
         child: new Text("忘记密码?", style: new TextStyle(fontSize: 16, color: Colors.black38),),
       ),
@@ -184,6 +179,8 @@ class _LoginPageState extends State<LoginPage> {
       child: new Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          automaticallyImplyLeading: true,
           elevation: 0,
         ),
         body: new SingleChildScrollView(

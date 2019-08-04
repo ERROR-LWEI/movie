@@ -74,9 +74,9 @@ class _ResetPageState extends State<ResetPage> {
 
   Widget buildFomField() {
     return new Container(
-      // decoration: new BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(8)), color: Colors.black12),
       width: 500,
       height: 200,
+      padding: EdgeInsets.only(top: 20.0),
       child: new Form(
         key: _resetFormKey,
         child: new Column(
@@ -95,7 +95,8 @@ class _ResetPageState extends State<ResetPage> {
                   },
                   decoration: new InputDecoration(
                     hintText: "输入邮箱/手机号",
-                    border: InputBorder.none
+                    border: InputBorder.none,
+                    hintStyle: TextStyle(color: Colors.black26)
                   ),
                   style: new TextStyle(fontSize: 18, color: Colors.black),
                   onSaved: (value) {
@@ -119,7 +120,7 @@ class _ResetPageState extends State<ResetPage> {
                   decoration: new InputDecoration(
                     hintText: "输入密码",
                     border: InputBorder.none,
-                    suffixIcon: new IconButton(icon: new Icon(isShowPassword ? AntIcons.eye_close_fill : AntIcons.eye_close, color: Colors.black45,), onPressed: showPassword,)
+                    hintStyle: TextStyle(color: Colors.black26)
                   ),
                   obscureText: !isShowPassword,
                   style: new TextStyle(fontSize: 18, color: Colors.black),
@@ -144,7 +145,7 @@ class _ResetPageState extends State<ResetPage> {
                   decoration: new InputDecoration(
                     hintText: "确认密码",
                     border: InputBorder.none,
-                    suffixIcon: new IconButton(icon: new Icon(isShowPasswordConfirm ? AntIcons.eye_close_fill : AntIcons.eye_close, color: Colors.black45,), onPressed: showPasswordConfirm,)
+                    hintStyle: TextStyle(color: Colors.black26)
                   ),
                   obscureText: !isShowPasswordConfirm,
                   style: new TextStyle(fontSize: 18, color: Colors.black),
@@ -204,6 +205,7 @@ class _ResetPageState extends State<ResetPage> {
     return Container(
       child: new Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           elevation: 0,
         ),
@@ -217,7 +219,6 @@ class _ResetPageState extends State<ResetPage> {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: new BoxDecoration(
-              // gradient: theme.Theme.primaryGradient,
               color: Colors.white
             ),
             child: new Column(
